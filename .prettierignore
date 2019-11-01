@@ -1,0 +1,8 @@
+# Add files here to ignore them from prettier formatting
+**/package-lock.json
+node_modules/
+dist/
+output/
+**/*.csv
+.env*
+**/*.md

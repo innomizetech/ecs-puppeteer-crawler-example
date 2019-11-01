@@ -1,0 +1,52 @@
+{
+  "name": "ecs-puppeteer-crawler-example",
+  "version": "1.0.0",
+  "description": "An example of using Puppeteer for automation test (or data crawler) on AWS ECS Fargate",
+  "repository": {
+    "url": "https://github.com/innomizetech/ecs-puppeteer-crawler-example"
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write *.*",
+    "pdf": "node dist/src/pdf-generator.js --url=https://www.innomizetech.com/ --headless",
+    "screenshot": "node dist/src/screenshot-generator.js --url=https://www.innomizetech.com/ --headless",
+    "pdf:ts": "env-cmd npx ts-node src/pdf-generator.ts --url=https://www.innomizetech.com/ --headless",
+    "screenshot:ts": "env-cmd npx ts-node src/screenshot-generator.ts --url=https://www.innomizetech.com/ --headless",
+    "clean:dist": "rimraf -- ./dist",
+    "clean:output": "rimraf -- output/*.png output/*.pdf",
+    "clean": "npm run clean:dist && npm run clean:output"
+  },
+  "author": "InnomizeTech <info@innomizetech.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@browserless/pool": "5.15.2",
+    "@types/puppeteer": "1.20.2",
+    "aws-sdk": "2.559.0",
+    "bluebird": "3.7.1",
+    "browserless": "5.15.5",
+    "connection-string-parser": "1.0.2",
+    "fs-extra": "8.1.0",
+    "moment": "2.24.0",
+    "promise-mysql": "4.1.1",
+    "puppeteer": "2.0.0",
+    "puppeteer-core": "2.0.0",
+    "typescript": "3.6.4",
+    "yargs": "14.2.0"
+  },
+  "engines": {
+    "node": "= 10.16.0"
+  },
+  "devDependencies": {
+    "@aws-cdk/aws-ec2": "1.15.0",
+    "@aws-cdk/aws-ecr": "1.15.0",
+    "@aws-cdk/aws-ecs": "1.15.0",
+    "@aws-cdk/aws-ecs-patterns": "1.15.0",
+    "@aws-cdk/aws-events": "1.15.0",
+    "@aws-cdk/aws-iam": "1.15.0",
+    "@aws-cdk/aws-s3": "1.15.0",
+    "@aws-cdk/core": "1.15.0",
+    "env-cmd": "10.0.1",
+    "prettier": "1.18.2",
+    "source-map-support": "^0.5.16"
+  }
+}
