@@ -1,3 +1,4 @@
+import path = require('path');
 import cdk = require('@aws-cdk/core');
 import ec2 = require('@aws-cdk/aws-ec2');
 import ecr = require('@aws-cdk/aws-ecr');
@@ -7,6 +8,8 @@ import iam = require('@aws-cdk/aws-iam');
 import { EcsTask } from '@aws-cdk/aws-events-targets';
 import { PolicyStatement } from '@aws-cdk/aws-iam';
 import { Bucket } from '@aws-cdk/aws-s3/lib/bucket';
+import { DockerImageAsset } from '@aws-cdk/aws-ecr-assets';
+
 import { PuppeteerCrawlerFargateStackProps } from './interfaces';
 
 export class PuppeteerCrawlerFargateStack extends cdk.Stack {
@@ -111,14 +114,16 @@ export class PuppeteerCrawlerFargateStack extends cdk.Stack {
       }
     );
 
-    const repo = ecr.Repository.fromRepositoryName(
-      this,
-      'PuppeteerCrawlerRepo',
-      props.repoName
-    );
+    // Define docker image assets that allows to build and push docker images to ECR automatically
+    // See: https://docs.aws.amazon.com/cdk/latest/guide/assets.html for more details
+    const asset = new DockerImageAsset(this, 'ecs-puppeteer-crawler-example', {
+      directory: path.join(__dirname, '../../'),
+      exclude: ['cdk.out', 'node_modules']
+    });
 
     taskDef.addContainer('PuppeteerContainer', {
-      image: ecs.ContainerImage.fromEcrRepository(repo),
+      // Note - adding imageUri will throw invalid docker ref of the task definition
+      image: ecs.ContainerImage.fromEcrRepository(asset.repository),
       logging: new ecs.AwsLogDriver({
         streamPrefix: 'puppeteer-data-crawler',
         logRetention: 1
