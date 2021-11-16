@@ -21,7 +21,7 @@
   "dependencies": {
     "@browserless/pool": "5.15.2",
     "@types/puppeteer": "1.20.2",
-    "aws-sdk": "2.559.0",
+    "aws-sdk": "2.814.0",
     "bluebird": "3.7.1",
     "browserless": "5.15.5",
     "connection-string-parser": "1.0.2",
