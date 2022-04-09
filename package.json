@@ -26,7 +26,7 @@
     "browserless": "5.15.5",
     "connection-string-parser": "1.0.2",
     "fs-extra": "8.1.0",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "promise-mysql": "4.1.1",
     "puppeteer": "2.0.0",
     "puppeteer-core": "2.0.0",
